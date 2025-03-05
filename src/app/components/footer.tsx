@@ -58,6 +58,7 @@ function Footer() {
                                 board@svcover.nl
                             </a>
                         </li>
+                        <br/>
                         <li>Study Association Cover</li>
                         <li>Postbus 407</li>
                         <li>9700 AK Groningen</li>
@@ -69,7 +70,14 @@ function Footer() {
             {/* Copyright Notice */}
             <div style={copyrightStyle}>
                 <p style={textStyle}>
-                    © 2025. All rights reserved.
+                    Created by{' '}
+                     <a href="https://www.svcover.nl/profile/3274" style={linkStyle}>
+                        Andi Toader
+                     </a>
+                    {' '}and{' '}
+                    <a href="https://www.svcover.nl/profile/3400" style={linkStyle}>
+                         Marcus Harald Olof Persson
+                    </a>.
                 </p>
             </div>
         </footer>

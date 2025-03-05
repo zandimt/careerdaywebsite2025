@@ -41,7 +41,7 @@ const App: React.FC = () => {
   return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 pt-20">
         <CareerDayLogo/>
-        <h1 className="text-4xl font-bold mb-8 text-gray-600">14 May 2025</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-600">14 May 2025, Energy Academy</h1>
         <div className="flex space-x-4">
           <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
             <span className="text-3xl font-bold text-gray-600">{timeLeft.days}</span>
