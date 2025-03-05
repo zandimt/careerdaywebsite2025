@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-fira-sans)'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
