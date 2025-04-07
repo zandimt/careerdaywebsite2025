@@ -1,0 +1,35 @@
+/* [project]/src/styles/navbar.css [app-client] (css) */
+nav.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 6px #0000001a;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.nav-links li {
+  margin: 0 1rem;
+}
+
+.nav-links li a {
+  color: #171717;
+  text-decoration: none;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=src_styles_navbar_b52d8e88.css.map*/

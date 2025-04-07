@@ -1,0 +1,29 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Local envs
+.venv/
+env/
+venv/
+
+# Django/DB
+*.sqlite3
+db.sqlite3
+
+# Env files
+.env
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Migrations (optional)
+# api/migrations/
