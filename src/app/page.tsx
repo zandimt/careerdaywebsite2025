@@ -1,73 +1,64 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { CareerDayLogo } from './components/logos';
-import Footer from './components/footer/footer';
 
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+export default function Home() {
+    const [timeLeft, setTimeLeft] = useState("");
+
+    useEffect(() => {
+        // todo: variableize this date
+        const targetDate = new Date("2025-05-14T09:15:00Z"); // Change this as needed
+
+        const updateCountdown = () => {
+            const now = new Date();
+            const diff = targetDate.getTime() - now.getTime();
+
+            if (diff <= 0) {
+                setTimeLeft("Event has started!");
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            setTimeLeft(
+                `${days}d ${hours}h ${minutes}m ${seconds}s`
+            );
+        };
+
+        updateCountdown(); // initial run
+        const interval = setInterval(updateCountdown, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <main>
+            <section className="relative w-full h-[500px]">
+                {/* Background Image */}
+                <Image
+                    src="/images/ea.png"
+                    alt="Energy Academy Europe"
+                    fill
+                    className="object-cover z-0"
+                />
+
+                {/* White Card with content */}
+                <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 w-4/5 max-w-4xl bg-white rounded-2xl shadow-lg h-[240px] flex flex-col items-center justify-center text-center px-6">
+                    {/* Inner Logo */}
+                    <Image
+                        src="/logos/careerday_wide.svg"
+                        alt="Career Day"
+                        width={600}
+                        height={200}
+                        className="mb-4"
+                    />
+                    <p className="text-black font-semibold text-3xl">14 May 2025 • Energy Academy Europe </p>
+                    <div className="text-2xl font-mono text-red-700">{timeLeft}</div>
+                </div>
+            </section>
+        </main>
+    );
 }
-
-const calculateTimeLeft = (): TimeLeft => {
-  const targetDate = new Date('2025-05-14T09:15:00');
-  const now = new Date();
-  const difference = targetDate.getTime() - now.getTime();
-
-  if (difference > 0) {
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / (1000 * 60)) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
-    };
-  } else {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-  }
-};
-
-const App: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-      <div className="app-container">
-        <div className="flex flex-col items-center justify-center flex-grow bg-gray-100 pt-20">
-          <CareerDayLogo />
-          <h1 className="text-4xl font-bold mb-8 text-gray-600">14 May 2025, Energy Academy</h1>
-          <div className="flex space-x-4">
-            <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-              <span className="text-3xl font-bold text-gray-600">{timeLeft.days}</span>
-              <span className="text-gray-600">Days</span>
-            </div>
-            <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-              <span className="text-3xl font-bold text-gray-600">{timeLeft.hours}</span>
-              <span className="text-gray-600">Hours</span>
-            </div>
-            <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-              <span className="text-3xl font-bold text-gray-600">{timeLeft.minutes}</span>
-              <span className="text-gray-600">Minutes</span>
-            </div>
-            <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-              <span className="text-3xl font-bold text-gray-600">{timeLeft.seconds}</span>
-              <span className="text-gray-600">Seconds</span>
-            </div>
-          </div>
-          <h2 className="text-3xl items-center font-bold mb-8 text-gray-600" style={{ padding: '40px' }}>
-            <a href="https://www.svcover.nl/events/4695">Register your interest!</a>
-          </h2>
-        </div>
-        <Footer />
-      </div>
-  );
-};
-
-export default App;
