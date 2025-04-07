@@ -12,7 +12,7 @@ export default {
         sans: ['var(--font-fira-sans)'],
       },
       colors: {
-        background: "var(--background)",
+        background: "var(--images)",
         foreground: "var(--foreground)",
       },
     },
