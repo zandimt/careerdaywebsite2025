@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { CareerDayLogo, CoverLogo } from './Logos';
-import '@/styles/navbar.css';
-import '@/styles/logos.css';
+import '../../styles/navbar.css';
+import '../../styles/logos.css';
 
 const Navbar: React.FC = () => {
     return (
@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
             </div>
             <ul className="nav-links">
                 <li>
-                    <Link href="/" className="text-white">Home</Link>
+                    <Link href="/frontend/public" className="text-white">Home</Link>
                 </li>
                 <li>
                     <Link href="/schedule" className="text-white">My Schedule</Link>

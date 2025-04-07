@@ -1,6 +1,6 @@
 import React from 'react';
-import { CoverLogo } from '../logos';
-import './footer.css';
+import { CoverLogo } from './Logos';
+import '../../styles/footer.css';
 
 function Footer() {
     return (
@@ -8,9 +8,10 @@ function Footer() {
             <div className="container">
                 {/* Cover Section */}
                 <div className="section">
-                    <a href="https://svcover.nl" target="_blank" rel="noopener noreferrer" className="logo-link">
+                    <div className="logo-container cover-logo-footer">
                         <CoverLogo/>
-                    </a>
+                    </div>
+                    <br/>
                     <p className="text">
                         Study Association for Artificial Intelligence, Computing
                         Science, and Computational Cognitive Science.
