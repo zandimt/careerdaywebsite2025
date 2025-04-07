@@ -12,8 +12,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./backend/static:/app/static
-      - ./backend/media:/app/media
+      - ./backend:/app
 
 
   db:

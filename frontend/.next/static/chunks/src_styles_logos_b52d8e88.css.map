@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/styles/logos.css"],"sourcesContent":[".logo-container {\n    display: flex;\n    align-items: center;\n}\n\n/* === CareerDay === */\n.careerday-logo {\n    margin-right: 1rem;\n}\n\n.careerday-wrapper {\n    position: relative;\n    height: 32px;\n    width: 240px;\n    display: flex;\n    align-items: center;\n    justify-content: left;\n}\n\n.careerday-wrapper img {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 32px;\n    width: auto;\n}\n\n.careerday-wrapper img.hover-logo {\n    opacity: 0;\n    z-index: 1;\n}\n\n.careerday-logo:hover .hover-logo {\n    opacity: 1;\n}\n\n.careerday-logo:hover .careerday-wrapper img:not(.hover-logo) {\n    opacity: 0;\n}\n\n/* === Cover === */\n.cover-logo {\n    margin-right: 1rem;\n}\n\n.cover-wrapper {\n    display: flex;\n    align-items: center;\n    height: 32px;\n    gap: 0.4rem;\n}\n\n.cover-wrapper img {\n    height: 32px;\n    width: auto;\n}\n.cover-logo-footer {\n    filter: brightness(0) invert(1);\n    height: auto;\n    width: 100%;\n}"],"names":[],"mappings":"AAAA;;;;;AAMA;;;;AAIA;;;;;;;;;AASA;;;;;;;;AAQA;;;;;AAKA;;;;AAIA;;;;AAKA;;;;AAIA;;;;;;;AAOA;;;;;AAIA"}}]
-}
