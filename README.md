@@ -34,4 +34,5 @@ docker-compose up
 * Django Admin: http://localhost:8001/admin
   * Username: admin 
   * Password: adminpass
+* Cover: http://localhost:8000
 
