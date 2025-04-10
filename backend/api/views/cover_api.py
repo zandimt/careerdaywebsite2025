@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny
 
 @api_view(['GET', 'OPTIONS'])
 @permission_classes([AllowAny])
-def cover_session(request: 'HttpRequest') -> JsonResponse | Response:
+def get_cover_session(request: 'HttpRequest') -> JsonResponse | Response:
     """
     Handles the retrieval of session member information from the COVER API.
 
@@ -29,6 +29,6 @@ def cover_session(request: 'HttpRequest') -> JsonResponse | Response:
         session_id: str = request.COOKIES['cover_session_id']
         url: str = settings.COVER_API_URL + "?method=session_get_member&session_id=" + session_id
         response: 'requests.Response' = requests.request(method='get', url=url)
-        return JsonResponse(json.loads(response.content))
+        return JsonResponse({"session_id": session_id})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
