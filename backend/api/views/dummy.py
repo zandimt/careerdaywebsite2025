@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Organization, Speaker, Session
-from .serializers import OrganizationSerializer, SpeakerSerializer, SessionSerializer
+from ..models import Organization, Speaker, Session
+from ..serializers import OrganizationSerializer, SpeakerSerializer, SessionSerializer
 
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()

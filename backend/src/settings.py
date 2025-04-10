@@ -140,5 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import os
 
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 
+# Cover
+COVER_API_URL = 'http://svcover.localhost:8000/api'
