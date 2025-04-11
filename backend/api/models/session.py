@@ -1,7 +1,6 @@
 from django.db import models
 from rest_framework import serializers
-
-from .timeslot import TimeSlot
+from .timeslot import TimeSlot, TimeSlotBasicSerializer
 from .participant import Participant
 from .organisation import Organisation
 import uuid
@@ -48,8 +47,16 @@ class SessionRegistration(models.Model):
         """
         return self.participant.name() + ' | ' + self.session.title
 
+    class Meta:
+        """
+        Meta class for Participant.
+        """
+        ordering = ['-registered_at']
+
 
 class SessionBasicSerializer(serializers.ModelSerializer):
+    time_slot = TimeSlotBasicSerializer(many=True, read_only=True)
+
     class Meta:
         model = Session
         fields = ['id', 'title', 'description', 'location', 'max_attendance', 'is_registrable']

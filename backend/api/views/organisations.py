@@ -7,7 +7,6 @@ from ..models.organisation import Organisation, OrganisationBasicSerializer
 from ..serializers.organisation_serializer import OrganisationSerializer
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
 def get_all_organisations(request: 'HttpRequest') -> JsonResponse:
     """
     Retrieve a list of all organisations.
@@ -22,8 +21,8 @@ def get_all_organisations(request: 'HttpRequest') -> JsonResponse:
     serializer = OrganisationBasicSerializer(organisations, many=True)
     return JsonResponse({"organisations": serializer.data})
 
+
 @api_view(['GET'])
-@permission_classes([AllowAny])
 def get_organisation(request: 'HttpRequest', organisation_id: int) -> Response | JsonResponse:
     """
     Retrieve a specific organisation by its ID.

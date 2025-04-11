@@ -12,6 +12,6 @@ class ParticipantSerializer(serializers.ModelSerializer):
         Meta class for ParticipantSerializer.
         """
         model = Participant
-        fields = ['id', 'first_name', 'preposition_name', 'last_name', 'email_address', 'phone_number', 'study_phase',
-                  'study', 'study_year', 'dietary_requirements', 'membership_id', 'registered_at',
+        fields = ['id', 'first_name', 'preposition_name', 'last_name', 'email_address', 'phone_number', 'url',
+                  'study_phase', 'study', 'study_year', 'dietary_requirements', 'membership_id', 'registered_at',
                   'checked_in_at']

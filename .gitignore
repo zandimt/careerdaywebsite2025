@@ -50,7 +50,6 @@ Thumbs.db
 # VSCode or IDE
 .vscode/
 .idea/
-/backend/bin/python
-/backend/bin/python3
-/backend/bin/python3.12
+/backend/bin/
 /backend/pyvenv.cfg
+/backend/uploads/

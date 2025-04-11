@@ -9,7 +9,6 @@ class SessionSerializer(serializers.ModelSerializer):
     Serializer for Session object.
     """
     organisation = OrganisationBasicSerializer(read_only=True)
-    time_slot = TimeSlotBasicSerializer(many=True, read_only=True)
 
     class Meta:
         model = Session

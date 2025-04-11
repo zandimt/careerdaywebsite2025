@@ -10,6 +10,7 @@ class Participant(models.Model):
     last_name = models.CharField(max_length=35, null=False)
     email_address = models.EmailField(null=False)
     phone_number = models.CharField(max_length=15, null=False)
+    url = models.URLField(max_length=200, null=True, blank=True)
     study_phase = models.CharField(max_length=25, null=False)
     study = models.CharField(max_length=25, null=False)
     study_year = models.CharField(max_length=25, null=False)

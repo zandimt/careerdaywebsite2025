@@ -26,9 +26,9 @@ def get_cover_session(request: 'HttpRequest') -> JsonResponse | Response:
         Response: A 404 Not Found response if the cookie is missing.
     """
     if 'cover_session_id' in request.COOKIES:
-        session_id: str = request.COOKIES['cover_session_id']
-        url: str = settings.COVER_API_URL + "?method=session_get_member&session_id=" + session_id
+        cover_session_id: str = request.COOKIES['cover_session_id']
+        url: str = settings.COVER_API_URL + "?method=session_get_member&session_id=" + cover_session_id
         response: 'requests.Response' = requests.request(method='get', url=url)
-        return JsonResponse({"session_id": session_id})
+        return JsonResponse({"cover_session_id": cover_session_id})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
