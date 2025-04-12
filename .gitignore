@@ -52,3 +52,4 @@ Thumbs.db
 /backend/bin/
 /backend/pyvenv.cfg
 /backend/uploads/
+/backend/emails/

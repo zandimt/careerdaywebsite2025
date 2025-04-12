@@ -41,7 +41,3 @@ class Participant(models.Model):
         Meta class for Participant.
         """
         ordering = ['-registered_at']
-
-    # TODO: Implement email_participant method (either here or elsewhere)
-    def email_participant(self):
-        ...

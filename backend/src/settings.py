@@ -190,3 +190,8 @@ CONSTANCE_CONFIG_FIELDSETS = {
         'EVENT_CAPACITY',
     ),
 }
+
+# === Mailing ===
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' # Change to SMTP in production
+DEFAULT_FROM_EMAIL = 'no-reply@yourdomain.com'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'emails')  # Change this to a proper directory for production
