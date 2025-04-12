@@ -1,18 +1,25 @@
+import uuid
+
 from django.db import models
 from rest_framework import serializers
-from .timeslot import TimeSlot, TimeSlotBasicSerializer
-from .participant import Participant
+
 from .organisation import Organisation
-import uuid
+from .participant import Participant
+from .timeslot import TimeSlot, TimeSlotBasicSerializer
 
 
 class Session(models.Model):
     """Session object representing a session with a speaker and time slot."""
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=60, null=False)
-    organisation = models.ForeignKey(Organisation, null=False, blank=True, on_delete=models.PROTECT)
+    organisation = models.ForeignKey(
+        Organisation, null=False, blank=True, on_delete=models.PROTECT
+    )
     description = models.TextField(null=True, blank=True)
-    time_slot = models.ForeignKey(TimeSlot, null=False, blank=True, on_delete=models.PROTECT)
+    time_slot = models.ForeignKey(
+        TimeSlot, null=False, blank=True, on_delete=models.PROTECT
+    )
     location = models.TextField(max_length=20, blank=False)
     max_attendance = models.IntegerField(default=40, null=False)
     is_registrable = models.BooleanField(default=True)
@@ -29,14 +36,19 @@ class Session(models.Model):
         Property to get the number of participants in the session.
         :return: Number of participants in the session.
         """
-        return self.session_set.aggregate(count=models.Count('id'))
+        return self.session_set.aggregate(count=models.Count("id"))
 
 
 class SessionRegistration(models.Model):
     """SessionRegistration object representing a registration for a session."""
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    participant = models.ForeignKey(Participant, default=None, on_delete=models.CASCADE,
-                                    related_name='session_participants')
+    participant = models.ForeignKey(
+        Participant,
+        default=None,
+        on_delete=models.CASCADE,
+        related_name="session_participants",
+    )
     session = models.ForeignKey(Session, default=None, on_delete=models.CASCADE)
     registered_at = models.DateTimeField(auto_now=True)
 
@@ -45,13 +57,14 @@ class SessionRegistration(models.Model):
         String representation of the SessionRegistration object.
         :return:
         """
-        return self.participant.name() + ' | ' + self.session.title
+        return self.session.title + " | " + self.participant.name
 
     class Meta:
         """
         Meta class for Participant.
         """
-        ordering = ['-registered_at']
+
+        ordering = ["-session__time_slot__start_time"]
 
 
 class SessionBasicSerializer(serializers.ModelSerializer):
@@ -59,5 +72,11 @@ class SessionBasicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ['id', 'title', 'description', 'location', 'max_attendance', 'is_registrable']
-
+        fields = [
+            "id",
+            "title",
+            "description",
+            "location",
+            "max_attendance",
+            "is_registrable",
+        ]

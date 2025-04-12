@@ -27,6 +27,11 @@ DB_USER=your_db_user
 DB_PASS=your_db_password
 DB_HOST=your_db_host
 DB_PORT=your_db_port
+
+EMAIL_HOST='your_email_host'
+EMAIL_PORT='your_email_port'
+EMAIL_HOST_USER='your_email_user'
+EMAIL_HOST_PASSWORD='your_email_password'
 ```
 3. Start the Docker containers (and locally run the Cover website)
 ```bash

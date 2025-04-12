@@ -1,9 +1,11 @@
-from django.db import models
 import uuid
+
+from django.db import models
 
 
 class Participant(models.Model):
     """Participant object representing a participant in the event."""
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=35, null=False)
     preposition_name = models.CharField(max_length=25, null=True, blank=True)
@@ -20,6 +22,7 @@ class Participant(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     checked_in_at = models.DateTimeField(null=True, blank=True)
 
+    @property
     def name(self):
         """
         Get the full name of the participant.
@@ -34,10 +37,11 @@ class Participant(models.Model):
         String representation of the Participant object.
         :return: String representation of the Participant object.
         """
-        return self.name()
+        return self.name
 
     class Meta:
         """
         Meta class for Participant.
         """
-        ordering = ['-registered_at']
+
+        ordering = ["-registered_at"]

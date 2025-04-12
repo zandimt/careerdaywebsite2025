@@ -13,29 +13,43 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
-from .views import root, svcover, organisations, participants, timeslots, sessions, settings
 
+from django.urls import path
+
+from .views import (organisations, participants, root, sessions, settings,
+                    svcover, timeslots)
 
 urlpatterns = [
     # Default
-    path('', root.get_api_root),
+    path("", root.get_api_root),
     # Cover
-    path('svcover/', svcover.get_cover_session),
+    path("svcover/", svcover.get_cover_session),
     # Participants
-    path('participants/', participants.get_all_participants),
-    path('participants/<uuid:participant_id>/', participants.get_participant),
-    path('participants/<uuid:participant_id>/check_in/', participants.check_in_participant),
-    path('participants/<uuid:participant_id>/check_out/', participants.check_out_participant),
-    path('participants/<uuid:participant_id>/sessions/', participants.get_participant_all_sessions),
-    path('participants/<uuid:participant_id>/sessions/<uuid:session_id>/', participants.get_participant_session),
+    path("participants/", participants.get_all_participants),
+    path("participants/<uuid:participant_id>/", participants.get_participant),
+    path(
+        "participants/<uuid:participant_id>/check_in/",
+        participants.check_in_participant,
+    ),
+    path(
+        "participants/<uuid:participant_id>/check_out/",
+        participants.check_out_participant,
+    ),
+    path(
+        "participants/<uuid:participant_id>/sessions/",
+        participants.get_participant_all_sessions,
+    ),
+    path(
+        "participants/<uuid:participant_id>/sessions/<uuid:session_id>/",
+        participants.get_participant_session,
+    ),
     # Organisations
-    path('organisations/', organisations.get_all_organisations),
-    path('organisations/<uuid:organisation_id>/', organisations.get_organisation),
+    path("organisations/", organisations.get_all_organisations),
+    path("organisations/<uuid:organisation_id>/", organisations.get_organisation),
     # Timeslots
-    path('timeslots/', timeslots.get_all_timeslots),
+    path("timeslots/", timeslots.get_all_timeslots),
     # Sessions
-    path('sessions/', sessions.get_all_sessions),
+    path("sessions/", sessions.get_all_sessions),
     # Settings
-    path('settings', settings.get_all_settings),
+    path("settings", settings.get_all_settings),
 ]

@@ -1,23 +1,28 @@
 from django.contrib import admin
-from ..models.email import Email
-from django.utils.html import format_html
 from django.template import Context, Template
+from django.utils.html import format_html
+
+from ..models.email import Email
+
 
 @admin.register(Email)
 class EmailAdmin(admin.ModelAdmin):
     """Admin view for Email model."""
-    readonly_fields = ['preview_email', 'id']
-    list_display = ['name', 'subject']
-    ordering = ['name']
+
+    readonly_fields = ["preview_email", "id"]
+    list_display = ["name", "subject"]
+    ordering = ["name"]
 
     def attachment_link(self, obj):
         if obj.attachment:
-            return format_html('<a href="{}" target="_blank">📎 {}</a>', obj.attachment.url,
-                               obj.attachment.name)
+            return format_html(
+                '<a href="{}" target="_blank">📎 {}</a>',
+                obj.attachment.url,
+                obj.attachment.name,
+            )
         return "—"
 
     attachment_link.short_description = "Attachment"
-
 
     def preview_email(self, obj):
         """
@@ -37,9 +42,9 @@ class EmailAdmin(admin.ModelAdmin):
                 </div>
                 """,
                 obj.subject,
-                html
+                html,
             )
         except Exception as e:
-            return f'Error rendering template: {e}'
+            return f"Error rendering template: {e}"
 
-    preview_email.short_description = 'Preview'
+    preview_email.short_description = "Preview"

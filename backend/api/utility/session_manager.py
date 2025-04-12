@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from constance import config
+
 from ..models import Participant
 from ..models.session import Session, SessionRegistration
 
@@ -11,7 +13,9 @@ def is_attending_session(participant: Participant, session: Session) -> bool:
     :param session: The session object.
     :return: True if the participant is attending the session, False otherwise.
     """
-    return SessionRegistration.objects.filter(participant_id=participant.id, session_id=session.id).exists()
+    return SessionRegistration.objects.filter(
+        participant_id=participant.id, session_id=session.id
+    ).exists()
 
 
 def is_session_registrations_open() -> bool:
@@ -33,7 +37,9 @@ def is_timeslot_used(session: Session, participant: Participant) -> bool:
     :param participant: The participant object.
     :return: True if the participant has already registered for a session in the same timeslot, False otherwise.
     """
-    participant_sessions = SessionRegistration.objects.filter(participant_id=participant.id)
+    participant_sessions = SessionRegistration.objects.filter(
+        participant_id=participant.id
+    )
 
     for registered in participant_sessions:
         compared_session = Session.objects.get(pk=registered.id)

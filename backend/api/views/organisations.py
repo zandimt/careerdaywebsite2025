@@ -1,13 +1,15 @@
-from django.http import JsonResponse, HttpRequest
+from django.http import HttpRequest, JsonResponse
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+
 from ..models.organisation import Organisation, OrganisationBasicSerializer
 from ..serializers.organisation_serializer import OrganisationSerializer
 
-@api_view(['GET'])
-def get_all_organisations(request: 'HttpRequest') -> JsonResponse:
+
+@api_view(["GET"])
+def get_all_organisations(request: "HttpRequest") -> JsonResponse:
     """
     Retrieve a list of all organisations.
 
@@ -22,8 +24,10 @@ def get_all_organisations(request: 'HttpRequest') -> JsonResponse:
     return JsonResponse({"organisations": serializer.data})
 
 
-@api_view(['GET'])
-def get_organisation(request: 'HttpRequest', organisation_id: int) -> Response | JsonResponse:
+@api_view(["GET"])
+def get_organisation(
+    request: "HttpRequest", organisation_id: int
+) -> Response | JsonResponse:
     """
     Retrieve a specific organisation by its ID.
 

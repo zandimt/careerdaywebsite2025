@@ -1,10 +1,12 @@
 import base64
+import csv
 import mimetypes
 
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import Context, Template
 
@@ -22,7 +24,7 @@ class ParticipantAdmin(admin.ModelAdmin):
     ordering = ['-registered_at']
 
     # TODO: Implement Admin Actions
-    @admin.action(description="Email content to selected participants.")
+    @admin.action(description="Email content to selected participants")
     def email_content(self, request, queryset):
         """
         Email content to selected participants.
@@ -34,10 +36,10 @@ class ParticipantAdmin(admin.ModelAdmin):
             if form.is_valid():
                 template = form.cleaned_data['template']
                 for participant in queryset:
-                    context = Context(
-                        {'name': participant.name,
-                         'email_address': participant.email_address,
-                         })
+                    context = Context({
+                        'name': participant.name,
+                        'email_address': participant.email_address,
+                        })
                     include_qr = form.cleaned_data['include_qr']
                     html = Template(template.body).render(context)
                     msg = EmailMessage(
@@ -57,7 +59,7 @@ class ParticipantAdmin(admin.ModelAdmin):
 
                     if include_qr:
                         qr = generate_qr_code(participant.id)
-                        filename = f'{participant.name().replace(' ', '')}_{participant.id}.png'
+                        filename = f'{participant.name.replace(' ', '')}_{participant.id}.png'
                         msg.attach(filename, qr.read(), 'image/png')
 
                     msg.send()
@@ -82,7 +84,8 @@ class ParticipantAdmin(admin.ModelAdmin):
                 'action_checkbox_name': ACTION_CHECKBOX_NAME,
             })
 
-    @admin.action(description="Export selected participants as badges.")
+    # TODO: Implement export_as_badges (need to design the file)
+    @admin.action(description="Export selected participants as badges")
     def export_as_badges(self, request, queryset) -> None:
         """
         Export selected participants as badges.
@@ -91,11 +94,28 @@ class ParticipantAdmin(admin.ModelAdmin):
         """
         self.message_user(request, "Not implemented yet!")
 
-    @admin.action(description="Export selected participants as CSV.")
-    def export_as_csv(self, request, queryset) -> None:
+    @admin.action(description="Export selected participants as CSV")
+    def export_as_csv(self, request, queryset):
         """
         Export selected participants as CSV.
-        :param request: HTTP request object.
-        :param queryset: Queryset of selected participants.
         """
-        self.message_user(request, "Not implemented yet!")
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="participants.csv"'
+
+        fieldnames = [
+            'id', 'name', 'email_address', 'phone_number', 'url',
+        ]
+
+        writer = csv.DictWriter(response, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for participant in queryset:
+            writer.writerow({
+                'id': participant.id,
+                'name': participant.name,
+                'email_address': participant.email_address,
+                'phone_number': participant.phone_number,
+                'url': participant.url,
+            })
+
+        return response

@@ -1,5 +1,7 @@
 from io import BytesIO
+
 import qrcode
+
 
 def generate_qr_code(content: str) -> BytesIO:
     """
