@@ -16,7 +16,6 @@ def get_api_root(request: 'HttpRequest') -> JsonResponse:
         "organisations": 'organisations',
         "timeslots": 'timeslots',
         "sessions": 'sessions',
-        "uploads": 'uploads',
         "settings": 'settings',
     }
     full_urls = {key: request.build_absolute_uri(path) for key, path in endpoints.items()}

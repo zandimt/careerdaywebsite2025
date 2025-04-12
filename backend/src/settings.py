@@ -12,14 +12,16 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 from pathlib import Path
 from datetime import date, datetime, time
 import os
-from decouple import config
+from decouple import Config, RepositoryEnv
+
+env = Config(repository=RepositoryEnv('.env.local'))
 
 # === Paths ===
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # === Security ===
-SECRET_KEY = 'django-insecure--u4+3r1i4g5h*wh5lc&zpgcaky-x(d#5=_aza#dk0^!tu4^zt&'
-DEBUG = True
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env("DEBUG")
 ALLOWED_HOSTS = []
 
 # === Installed Apps ===
@@ -76,11 +78,11 @@ WSGI_APPLICATION = 'src.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config("DB_NAME"),
-        'USER': config("DB_USER"),
-        'PASSWORD': config("DB_PASS"),
-        'HOST': config("DB_HOST"),
-        'PORT': config("DB_PORT", default="5432"),
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASS"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT", default="5432"),
     }
 }
 

@@ -6,7 +6,7 @@ services:
     ports:
       - "8001:8000"
     env_file:
-      - ./backend/.env
+      - ./backend/.env.local
     depends_on:
       - db
     volumes:

@@ -16,13 +16,17 @@ Not required, but needed for full functionality.
 git clone https://github.com/zandimt/careerdaywebsite2025.git
 cd careerdaywebsite2025
 ```
-2. Set up environment files `.env` in [backend](backend)
+2. Set up environment files [.env](backend/.env)
+Create a copy of `.env` and rename it to `.env.local` in the `backend` directory. This file is used to set up the local environment variables for the Django application.
 ```dotenv
-DB_NAME=careerday
-DB_USER=careeruser
-DB_PASSWORD=yourpassword
-DB_HOST=db
-DB_PORT=5432
+SECRET_KEY='your-secret-key'
+DEBUG=False
+
+DB_NAME=your_db_name
+DB_USER=your_db_user
+DB_PASS=your_db_password
+DB_HOST=your_db_host
+DB_PORT=your_db_port
 ```
 3. Start the Docker containers (and locally run the Cover website)
 ```bash
