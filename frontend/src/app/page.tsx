@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+// testing
+import QrCheckIn from './components/QRCodeScanner';
 
 export default function Home() {
     const [timeLeft, setTimeLeft] = useState("");
@@ -36,6 +38,9 @@ export default function Home() {
 
     return (
         <main>
+            <div className="p-4 bg-gray-50">
+                <QrCheckIn />
+            </div>
             <section className="relative w-full h-[500px]">
                 {/* Background Image */}
                 <Image

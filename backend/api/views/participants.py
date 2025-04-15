@@ -4,9 +4,9 @@ from django.db.models import Q
 from django.http import HttpRequest, JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from rest_framework.response import Response
-
+from uuid import UUID
 from ..models import Participant, Session
 from ..models.session import SessionRegistration
 from ..serializers.participant_serializer import ParticipantSerializer
@@ -15,9 +15,10 @@ from ..utility.session_manager import (is_attending_session,
                                        is_timeslot_used)
 from ..utility.validate_object import validate_object
 
+# TODO: Authentication?
 
 @api_view(["GET", "POST"])
-@permission_classes([IsAdminUser])
+@permission_classes([AllowAny])
 def get_all_participants(request: "HttpRequest") -> Response | JsonResponse:
     """
     Retrieve a list of all participants or create a new participant.
@@ -50,10 +51,10 @@ def get_all_participants(request: "HttpRequest") -> Response | JsonResponse:
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAdminUser])
 @api_view(["GET", "PUT", "DELETE"])
+@permission_classes([AllowAny])
 def get_participant(
-    request: "HttpRequest", participant_id: int
+    request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
     participant = validate_object(Participant, participant_id)
 
@@ -74,10 +75,10 @@ def get_participant(
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAdminUser])
 @api_view(["GET", "POST"])
+@permission_classes([AllowAny])
 def get_participant_all_sessions(
-    request: "HttpRequest", participant_id: int
+    request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
     participant = validate_object(Participant, participant_id)
 
@@ -148,10 +149,10 @@ def get_participant_all_sessions(
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAdminUser])
 @api_view(["GET", "DELETE"])
+@permission_classes([AllowAny])
 def get_participant_session(
-    request: "HttpRequest", participant_id: int, session_id: int
+    request: "HttpRequest", participant_id: UUID, session_id: UUID
 ) -> Response | JsonResponse:
     participant = validate_object(Participant, participant_id)
     session = validate_object(Session, session_id)
@@ -182,24 +183,24 @@ def get_participant_session(
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAdminUser])
+
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def check_in_participant(
-    request: "HttpRequest", participant_id: int
+        request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
     participant = validate_object(Participant, participant_id)
-
     participant.checked_in_at = datetime.now()
     participant.save()
     serializer = ParticipantSerializer(participant)
-
     return JsonResponse(serializer.data, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAdminUser])
+
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def check_out_participant(
-    request: "HttpRequest", participant_id: int
+    request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
     participant = validate_object(Participant, participant_id)
 
