@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// testing
-import QrCheckIn from './components/QRCodeScanner';
 
 export default function Home() {
     const [timeLeft, setTimeLeft] = useState("");
@@ -38,9 +36,6 @@ export default function Home() {
 
     return (
         <main>
-            <div className="p-4 bg-gray-50">
-                <QrCheckIn />
-            </div>
             <section className="relative w-full h-[500px]">
                 {/* Background Image */}
                 <Image
@@ -62,6 +57,16 @@ export default function Home() {
                     />
                     <p className="text-black font-semibold text-3xl">14 May 2025 • Energy Academy Europe </p>
                     <div className="text-2xl font-mono text-red-700">{timeLeft}</div>
+                </div>
+            </section>
+            <section>
+                <div className="grid grid-cols-2 gap-4 p-4 m-10">
+                    <div className="rounded bg-white text-black shadow-lg p-15 m-5">
+                        <div className="font-bold text-3xl p-6">About the Cover Career Day</div>
+                        The Cover Career Day is a day event packed with talks and workshops from AI/CS/CCS-related companies in Groningen and in the Netherlands. Find companies that match your interests and learn  more about their work lifestyle, participate in workshops to develop  your professional skills, and in the end, join us for networking drinks  and talk with recruiters one-on-one.
+
+                        For those in pursuit of a career or just curious about their opportunities, Cover's Career Day  offers you the chance to put your foot in the door and start building  your professional network.
+                    </div>
                 </div>
             </section>
         </main>

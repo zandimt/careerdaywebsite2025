@@ -2,7 +2,8 @@ FROM python:3.12-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache postgresql-client
+RUN apk add --no-cache postgresql-client & \
+    apk add --no-cache bash
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

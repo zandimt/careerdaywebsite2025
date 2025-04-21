@@ -19,3 +19,16 @@ export default (phase: string) => {
         // You can add production-specific config here if needed
     }
 }
+
+// next.config.js
+module.exports = {
+    async redirects() {
+        return [
+            {
+                source: '/home',
+                destination: '/', // or any default page
+                permanent: true, // 308 permanent redirect
+            },
+        ];
+    },
+};
