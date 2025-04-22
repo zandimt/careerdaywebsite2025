@@ -13,10 +13,10 @@ const Navbar: React.FC = () => {
             </div>
             <ul className="nav-links">
                 <li>
-                    <Link href="/frontend/public" className="text-white">Home</Link>
+                    <Link href="/home" className="text-white">Home</Link>
                 </li>
                 <li>
-                    <Link href="/schedule" className="text-white">My Schedule</Link>
+                    <Link href="/schedule" className="text-white">Schedule</Link>
                 </li>
                 <li>
                     <Link href="/practical" className="text-white">Practical Information</Link>

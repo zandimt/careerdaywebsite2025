@@ -46,7 +46,8 @@ export default function Home() {
                 />
 
                 {/* White Card with content */}
-                <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 w-4/5 max-w-4xl bg-white rounded-2xl shadow-lg h-[240px] flex flex-col items-center justify-center text-center px-6">
+                <div
+                    className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 w-4/5 max-w-4xl bg-white rounded-2xl shadow-lg h-[240px] flex flex-col items-center justify-center text-center px-6">
                     {/* Inner Logo */}
                     <Image
                         src="/logos/careerday_wide.svg"
@@ -59,13 +60,35 @@ export default function Home() {
                     <div className="text-2xl font-mono text-red-700">{timeLeft}</div>
                 </div>
             </section>
-            <section>
-                <div className="grid grid-cols-2 gap-4 p-4 m-10">
-                    <div className="rounded bg-white text-black shadow-lg p-15 m-5">
-                        <div className="font-bold text-3xl p-6">About the Cover Career Day</div>
-                        The Cover Career Day is a day event packed with talks and workshops from AI/CS/CCS-related companies in Groningen and in the Netherlands. Find companies that match your interests and learn  more about their work lifestyle, participate in workshops to develop  your professional skills, and in the end, join us for networking drinks  and talk with recruiters one-on-one.
+            <section className="bg-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-4 items-stretch">
+                    {/* Text card */}
+                    <div className="flex flex-col rounded-2xl bg-white text-black shadow-lg p-6 m-5">
+                        <div className="font-bold text-3xl mb-4">About the Cover Career Day</div>
+                        <div className="text-base leading-relaxed flex-grow">
+                            <p>
+                                The Cover Career Day is a day event packed with talks and workshops from
+                                AI/CS/CCS-related companies in Groningen and in the Netherlands. Find companies that
+                                match your interests and learn more about their work lifestyle, participate in workshops
+                                to develop your professional skills, and in the end, join us for networking drinks and
+                                talk with recruiters one-on-one.
+                            </p>
+                            <br/>
+                            <p>
+                                For those in pursuit of a career or just curious about their opportunities, Cover's
+                                Career Day offers you the chance to put your foot in the door and start building your
+                                professional network.
+                            </p>
+                        </div>
+                    </div>
 
-                        For those in pursuit of a career or just curious about their opportunities, Cover's Career Day  offers you the chance to put your foot in the door and start building  your professional network.
+                    {/* Image card */}
+                    <div className="flex rounded-2xl bg-white shadow-lg p-6 m-5">
+                        <img
+                            src="/images/careerdaypeoople.jpg"
+                            alt="People paying attention to a speaker"
+                            className="w-full h-full object-cover rounded-2xl"
+                        />
                     </div>
                 </div>
             </section>
