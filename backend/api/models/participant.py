@@ -17,7 +17,7 @@ class Participant(models.Model):
     study = models.CharField(max_length=25, null=False)
     study_year = models.CharField(max_length=25, null=False)
     dietary_requirements = models.CharField(max_length=25, null=True, blank=True)
-    membership_id = models.IntegerField(null=False, unique=True)
+    membership_id = models.IntegerField(null=True, blank=True, unique=True)
     registered_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     checked_in_at = models.DateTimeField(null=True, blank=True)
