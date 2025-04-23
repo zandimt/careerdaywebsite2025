@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../styles/globals.css";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Partners from './components/Partners';
 
 export const metadata: Metadata = {
   title: "Cover Career Day",
@@ -20,6 +21,7 @@ export default function RootLayout({
             <Navbar />
         </nav>
         {children}
+        <Partners />
         <footer>
             <Footer />
         </footer>
