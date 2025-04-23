@@ -1,11 +1,13 @@
 from django.http import HttpRequest, JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
 from ..models.timeslot import TimeSlot
 from ..serializers.timeslot_serializer import TimeSlotSerializer
 
 
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def get_all_timeslots(request: "HttpRequest") -> JsonResponse:
     """
     Retrieve a list of all timeslots.

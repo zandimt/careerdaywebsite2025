@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
 from django.http import HttpRequest, JsonResponse
 from rest_framework import status
@@ -18,7 +19,7 @@ from ..utility.validate_object import validate_object
 # TODO: Authentication?
 
 @api_view(["GET", "POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_all_participants(request: "HttpRequest") -> Response | JsonResponse:
     """
     Retrieve a list of all participants or create a new participant.
@@ -42,17 +43,34 @@ def get_all_participants(request: "HttpRequest") -> Response | JsonResponse:
             return JsonResponse(serializer.data, safe=False)
         case "POST":
             serializer = ParticipantSerializer(data=request.POST)
+            user = request.user
+            # TODO: Debug this
+            existing = Participant.objects.filter(membership_id=user.membership_id)
+
+            participant_data = {
+                "first_name": user.first_name,
+                "preposition_name": user.preposition_name,
+                "last_name": user.last_name,
+                "email_address": user.email_address,
+                "phone_number": user.phone_number,
+                "url": user.url,
+                "study_phase": user.study_phase,
+                "study": user.study,
+                "study_year": user.study_year,
+                "membership_id": user.membership_id,
+            }
+
+            serializer = ParticipantSerializer(data=participant_data)
+
             if serializer.is_valid():
                 serializer.save()
-                participant = request.POST
-                # TODO: Email Participant - separate object?
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+                return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["GET", "PUT", "DELETE"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def get_participant(
     request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
@@ -76,7 +94,7 @@ def get_participant(
 
 
 @api_view(["GET", "POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def get_participant_all_sessions(
     request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
@@ -150,7 +168,7 @@ def get_participant_all_sessions(
 
 
 @api_view(["GET", "DELETE"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def get_participant_session(
     request: "HttpRequest", participant_id: UUID, session_id: UUID
 ) -> Response | JsonResponse:
@@ -185,7 +203,7 @@ def get_participant_session(
 
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def check_in_participant(
         request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:
@@ -198,7 +216,7 @@ def check_in_participant(
 
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def check_out_participant(
     request: "HttpRequest", participant_id: UUID
 ) -> Response | JsonResponse:

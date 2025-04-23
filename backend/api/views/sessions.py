@@ -1,11 +1,13 @@
 from django.http import HttpRequest, JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
 from ..models.session import Session
 from ..serializers.session_serializer import SessionSerializer
 
 
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def get_all_sessions(request: "HttpRequest") -> JsonResponse:
     """
     Retrieve a list of all sessions.

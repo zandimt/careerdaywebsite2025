@@ -22,6 +22,7 @@ from .views import (organisations, participants, root, sessions, settings,
 urlpatterns = [
     # Default
     path("", root.get_api_root),
+    path("check_auth/", root.check_auth),
     # Cover
     path("svcover/", svcover.get_cover_session),
     # Participants
