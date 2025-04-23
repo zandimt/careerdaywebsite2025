@@ -59,9 +59,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
-    ],
 }
 
 # === URL Config ===
@@ -192,6 +189,9 @@ CONSTANCE_CONFIG_FIELDSETS = {
     "🧾 Session Selection Windows": ("SESSIONS_OPEN", "SESSIONS_CLOSED"),
     "👥 Capacity": ("EVENT_CAPACITY",),
 }
+
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = False  # okay for local dev
 
 # === Mailing ===
 EMAIL_BACKEND = (

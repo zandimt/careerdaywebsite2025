@@ -42,25 +42,7 @@ def get_all_participants(request: "HttpRequest") -> Response | JsonResponse:
             serializer = ParticipantSerializer(participants, many=True)
             return JsonResponse(serializer.data, safe=False)
         case "POST":
-            serializer = ParticipantSerializer(data=request.POST)
-            user = request.user
-            # TODO: Debug this
-            existing = Participant.objects.filter(membership_id=user.membership_id)
-
-            participant_data = {
-                "first_name": user.first_name,
-                "preposition_name": user.preposition_name,
-                "last_name": user.last_name,
-                "email_address": user.email_address,
-                "phone_number": user.phone_number,
-                "url": user.url,
-                "study_phase": user.study_phase,
-                "study": user.study,
-                "study_year": user.study_year,
-                "membership_id": user.membership_id,
-            }
-
-            serializer = ParticipantSerializer(data=participant_data)
+            serializer = ParticipantSerializer(data=request.data)
 
             if serializer.is_valid():
                 serializer.save()

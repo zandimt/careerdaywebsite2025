@@ -1,8 +1,9 @@
+'use client'
 import { useEffect } from 'react'
 
 const LoginPage = () => {
     useEffect(() => {
-        window.location.href = 'https://svcover.nl/login?referrer=https://careerday.svcover.nl'
+        window.location.href = 'http://localhost:8000/login?referrer=/'
     }, [])
 
     return <p>Redirecting to Cover login...</p>
