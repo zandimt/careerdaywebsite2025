@@ -2,37 +2,32 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Countdown from "./components/Countdown";
+
 
 export default function Home() {
-    const [timeLeft, setTimeLeft] = useState("");
+    const [eventDateStr, setEventDateStr] = useState("");
+    const [isoStartTime, setIsoStartTime] = useState("");
 
     useEffect(() => {
-        // todo: variableize this date
-        const targetDate = new Date("2025-05-14T09:15:00Z"); // Change this as needed
+        const fetchEventInfo = async () => {
+            const res = await fetch("/api/settings"); // adjust endpoint
+            const data = await res.json();
 
-        const updateCountdown = () => {
-            const now = new Date();
-            const diff = targetDate.getTime() - now.getTime();
+            const localDate = new Date(`${data.EVENT_DATE}T${data.EVENT_START_TIME}`);
+            const displayDate = localDate.toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+            });
 
-            if (diff <= 0) {
-                setTimeLeft("Event has started!");
-                return;
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-
-            setTimeLeft(
-                `${days}d ${hours}h ${minutes}m ${seconds}s`
-            );
+            setEventDateStr(displayDate);
+            setIsoStartTime(localDate.toISOString());
         };
 
-        updateCountdown(); // initial run
-        const interval = setInterval(updateCountdown, 1000);
-        return () => clearInterval(interval);
+        fetchEventInfo();
     }, []);
+
 
     return (
         <main>
@@ -56,8 +51,8 @@ export default function Home() {
                         height={200}
                         className="mb-4"
                     />
-                    <p className="text-black font-semibold text-3xl">14 May 2025 • Energy Academy Europe </p>
-                    <div className="text-2xl font-mono text-red-700">{timeLeft}</div>
+                    <p className="text-black font-semibold text-3xl">{eventDateStr} • Energy Academy Europe </p>
+                    <Countdown target={isoStartTime} />
                 </div>
             </section>
             <section className="bg-gray-100">

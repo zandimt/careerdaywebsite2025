@@ -52,5 +52,5 @@ urlpatterns = [
     # Sessions
     path("sessions/", sessions.get_all_sessions),
     # Settings
-    path("settings", settings.get_all_settings),
+    path("settings/", settings.get_all_settings),
 ]

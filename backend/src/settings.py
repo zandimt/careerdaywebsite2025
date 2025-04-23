@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # === Security ===
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'svcover.localhost', 'backend']
 
 # === Installed Apps ===
 INSTALLED_APPS = [
@@ -189,9 +189,6 @@ CONSTANCE_CONFIG_FIELDSETS = {
     "🧾 Session Selection Windows": ("SESSIONS_OPEN", "SESSIONS_CLOSED"),
     "👥 Capacity": ("EVENT_CAPACITY",),
 }
-
-SESSION_COOKIE_SAMESITE = "None"
-SESSION_COOKIE_SECURE = False  # okay for local dev
 
 # === Mailing ===
 EMAIL_BACKEND = (

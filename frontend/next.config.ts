@@ -31,4 +31,24 @@ module.exports = {
             },
         ];
     },
+    async rewrites() {
+        return [
+            {
+                source: '/api/svcover',
+                destination: 'http://backend:8000/api/svcover/',
+            },
+            {
+                source: '/api/settings',
+                destination: 'http://backend:8000/api/settings/',
+            },
+            {
+                source: '/api/participants/:path*',
+                destination: 'http://backend:8000/api/participants/:path*',
+            },
+            {
+                source: '/api/organisations/:path*',
+                destination: 'http://backend:8000/api/organisations/:path*',
+            },
+        ];
+    }
 };
