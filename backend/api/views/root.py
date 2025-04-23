@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, JsonResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -23,3 +24,8 @@ def get_api_root(request: "HttpRequest") -> JsonResponse:
         key: request.build_absolute_uri(path) for key, path in endpoints.items()
     }
     return JsonResponse(full_urls)
+
+
+@login_required
+def check_auth(request):
+    return JsonResponse({'authenticated': True, 'participant_id': request.user.id})

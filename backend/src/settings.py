@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "constance",
     "constance.backends.database",
     "rest_framework",
+    "rest_framework.authtoken",
     "corsheaders",
     "api",
 ]
@@ -55,8 +56,8 @@ MIDDLEWARE = [
 # === Rest Framework ===
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",  # for logged-in Django admin
-        "rest_framework.authentication.TokenAuthentication",  # for API tokens
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
