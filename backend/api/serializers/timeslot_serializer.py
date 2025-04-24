@@ -7,7 +7,7 @@ from .session_serializer import SessionSerializer
 class TimeSlotSerializer(serializers.ModelSerializer):
     """Serializer for TimeSlot object."""
 
-    session_set = SessionSerializer(many=True, read_only=True)
+    session = SessionSerializer(many=True, read_only=True)
 
     class Meta:
         model = TimeSlot
@@ -17,6 +17,5 @@ class TimeSlotSerializer(serializers.ModelSerializer):
             "is_session",
             "start_time",
             "end_time",
-            "location",
-            "session_set",
+            "session",
         ]

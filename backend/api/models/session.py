@@ -14,7 +14,7 @@ class Session(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=60, null=False)
     organisation = models.ForeignKey(
-        Organisation, null=False, blank=True, on_delete=models.PROTECT
+        Organisation, null=True, blank=True, on_delete=models.PROTECT
     )
     description = models.TextField(null=True, blank=True)
     time_slot = models.ForeignKey(

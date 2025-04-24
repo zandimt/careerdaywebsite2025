@@ -56,6 +56,22 @@ module.exports = {
             {
                 source: '/uploads/:path*',
                 destination: 'http://backend:8000/uploads/:path*',
+            },
+            {
+                source: '/api/timeslots',
+                destination: 'http://backend:8000/api/timeslots/',
+            },
+            {
+                source: '/api/timeslots/:time_slot_id',
+                destination: 'http://backend:8000/api/timeslots/:time_slot_id/',
+            },
+            {
+                source: '/api/sessions',
+                destination: 'http://backend:8000/api/sessions/',
+            },
+            {
+                source: '/api/sessions/:session_id',
+                destination: 'http://backend:8000/api/sessions/:session_id/',
             }
         ];
     }
