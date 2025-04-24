@@ -25,5 +25,5 @@ class OrganisationSerializer(serializers.ModelSerializer):
             "website",
             "partner_type",
             "logo",
-            "session_set",
+            "session",
         ]
