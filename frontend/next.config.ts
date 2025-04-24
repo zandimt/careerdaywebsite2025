@@ -46,9 +46,17 @@ module.exports = {
                 destination: 'http://backend:8000/api/participants/:path*',
             },
             {
-                source: '/api/organisations/:path*',
-                destination: 'http://backend:8000/api/organisations/:path*',
+                source: '/api/organisations',
+                destination: 'http://backend:8000/api/organisations/',
             },
+            {
+                source: '/api/organisations/:organisation_id',
+                destination: 'http://backend:8000/api/organisations/:organisation_id/',
+            },
+            {
+                source: '/uploads/:path*',
+                destination: 'http://backend:8000/uploads/:path*',
+            }
         ];
     }
 };

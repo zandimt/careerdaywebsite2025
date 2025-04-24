@@ -21,8 +21,8 @@ export default function RootLayout({
             <Navbar />
         </nav>
         {children}
-        <Partners />
         <footer>
+            <Partners />
             <Footer />
         </footer>
         </body>
